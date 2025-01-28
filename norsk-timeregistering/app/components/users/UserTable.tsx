@@ -1,7 +1,10 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import Button from '../ui/Button';
 import Table from '../ui/Table';
-import { getUsers } from '@/services/api'; // Import the getUsers function
+import { getUsers } from '@/services/api';
+import Image from 'next/image';
 
 interface User {
   photo: string;
@@ -42,8 +45,8 @@ const UserTable = () => {
     <div>
       <div className="flex justify-between items-center mb-4">
         <div>
-          <p>Total members: {totalMembers}</p>
-          <p>Current used: {currentMembers}</p>
+          <p className="text-gray-500">Total members: {totalMembers}</p>
+          <p className="text-gray-500">Current used: {currentMembers}</p>
         </div>
         <Button>
           <span className="text-2xl">&#8592;</span> Filter
@@ -53,7 +56,15 @@ const UserTable = () => {
         {users.map((user) => (
           <tr key={user.email}>
             <td className="px-6 py-4 whitespace-nowrap">
-              <img src={user.photo} alt={user.memberName} className="h-10 w-10 rounded-full" />
+              <div className="relative h-10 w-10">
+                <Image
+                  src={user.photo || '/placeholder-image.jpg'} // Provide a placeholder image
+                  alt={user.memberName}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-full"
+                />
+              </div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">{user.memberName}</td>
             <td className="px-6 py-4 whitespace-nowrap">{user.mobile}</td>
@@ -67,12 +78,16 @@ const UserTable = () => {
                 {user.status}
               </span>
             </td>
-            <td className="px-6 py-4 whitespace-nowrap">
+            <td className="px-6 py-4 whitespace-nowrap space-x-2">
               <button className="text-indigo-600 hover:text-indigo-900">
-                {/* Edit icon */}
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
               </button>
-              <button className="text-indigo-600 hover:text-indigo-900 ml-4">
-                {/* Delete icon */}
+              <button className="text-indigo-600 hover:text-indigo-900">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
               </button>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">

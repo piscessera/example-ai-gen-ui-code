@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import UserTable from '@/app/components/users/UserTable';
 import Tabs from '@/app/components/ui/Tabs';
@@ -18,11 +20,11 @@ const MembersPage = () => {
         ]}
         onTabChange={handleTabChange}
       />
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 mt-4">
         <h2 className="text-2xl font-bold">Members</h2>
-        <div>
-          <Button className="mr-2">Add new</Button>
-          <Button className="mr-2">Import members</Button>
+        <div className="flex space-x-2">
+          <Button>Add new</Button>
+          <Button>Import members</Button>
           <Button>Export members (Excel)</Button>
         </div>
       </div>
